@@ -10,6 +10,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/plugin-transform-runtime": "^7.9.6",
+    "@types/marked": "^0.7.4",
     "@types/node": "^14.0.5",
     "@types/react": "16.9.25",
     "@types/react-dom": "16.9.5",
@@ -28,6 +29,7 @@
     "@emotion/styled": "^10.0.27",
     "components": "^0.1.0",
     "helpers": "^0.0.6",
+    "marked": "^1.1.0",
     "react": "0.0.0-experimental-aae83a4b9",
     "react-dom": "0.0.0-experimental-aae83a4b9"
   }
