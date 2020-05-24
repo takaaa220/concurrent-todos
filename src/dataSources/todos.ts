@@ -4,6 +4,7 @@ import { Storage } from "./storage";
 
 type A_TODO = { [key: string]: Todo };
 
+// @TODO: 雑に書いているので早急にリファクタリングが必要
 export class todoApi {
   private storage: Storage<A_TODO>;
 
