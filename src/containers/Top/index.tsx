@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import styled from "@emotion/styled";
-import { RouteContext } from "../contexts/RouteContext";
-import { changePage as toTodo } from "./Todo";
+import { AppContext } from "../App/states";
+import { changePage as toTodo } from "../Todo";
+import { changePage as toMarkdown } from "../Markdown";
 
 export const changePage = () =>
   ({
@@ -9,14 +10,14 @@ export const changePage = () =>
   } as const);
 
 export const TopPage = () => {
-  const { changeState } = useContext(RouteContext);
+  const { changeState } = useContext(AppContext);
 
   return (
     <section>
       <Heading>This site has two React Concurrent Mode Demos.</Heading>
       <List>
         <Item onClick={() => changeState(toTodo())}>Todos</Item>
-        <Item>Markdown Editor</Item>
+        <Item onClick={() => changeState(toMarkdown())}>Markdown Editor</Item>
       </List>
     </section>
   );

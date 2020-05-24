@@ -9,7 +9,12 @@ export const changePage = () =>
 export const MarkdownPage = () => {
   return (
     <section>
-      <h2>This page is markdown editor demo.</h2>
+      <Heading>This page is markdown editor demo.</Heading>
     </section>
   );
 };
+
+const Heading = styled.h2`
+  margin-bottom: 8px;
+  font-size: 1.8rem;
+`;

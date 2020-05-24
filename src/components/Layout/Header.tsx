@@ -1,21 +1,19 @@
 import React, { FC, useContext } from "react";
 import styled from "@emotion/styled";
-import { RouteContext } from "../contexts/RouteContext";
-import { changePage as toTodo } from "../pages/Todo";
-import { changePage as toTop } from "../pages/Top";
-import { changePage as toMarkdown } from "../pages/Markdown";
+import { AppContext } from "../../containers/App/states";
+import { changePage as toTop } from "../../containers/Top";
 
 export const Header: FC = () => {
-  const { changeState } = useContext(RouteContext);
+  const { changeState } = useContext(AppContext);
 
   return (
     <Wrapper>
-      <Logo>Concurrent Demo</Logo>
+      <Logo onClick={() => changeState(toTop())}>Concurrent Demo</Logo>
       <nav>
         <List>
-          <Item onClick={() => changeState(toTop())}>Top</Item>
-          <Item onClick={() => changeState(toTodo())}>Todo</Item>
-          <Item onClick={() => changeState(toMarkdown())}>Markdown</Item>
+          <Item>
+            <a href="https://github.com/takaaa220">Creator's GitHub</a>
+          </Item>
         </List>
       </nav>
     </Wrapper>
@@ -37,6 +35,7 @@ const Wrapper = styled.header`
 const Logo = styled.h1`
   font-size: 2rem;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 const List = styled.ul`
@@ -45,7 +44,5 @@ const List = styled.ul`
 
 const Item = styled.li`
   padding: 0 12px;
-  cursor: pointer;
   color: green;
-  text-decoration: underline;
 `;
