@@ -1,9 +1,5 @@
-import { sleep } from "../utils/sleep";
-
-export type Todo = {
-  id: string;
-  title: string;
-};
+import { sleep } from "~/utils/sleep";
+import { Todo } from "~/components/Todos";
 
 class todoApi {
   private _todos: { [key: string]: Todo } = {};

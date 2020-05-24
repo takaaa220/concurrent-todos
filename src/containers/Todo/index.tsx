@@ -1,9 +1,10 @@
 import React, { FC, useState, FormEvent } from "react";
 import styled from "@emotion/styled";
 
-import { Fetcher } from "../../helpers/fetcher";
-import { Todo, TodoAPI } from "../../dataSources/todos";
-import { Todos } from "../../components/Todos";
+import { Fetcher } from "~/helpers/fetcher";
+import { Todo } from "~/components/Todos";
+import { TodoAPI } from "~/dataSources/todos";
+import { Todos } from "~/components/Todos";
 
 export const ErrorPage = <div>Todoの取得に失敗しました</div>;
 export const changePage = () =>

@@ -1,7 +1,11 @@
 import React, { FC } from "react";
-import { Fetcher } from "../../helpers/fetcher";
-import { Todo } from "../../dataSources/todos";
+import { Fetcher } from "~/helpers/fetcher";
 import styled from "@emotion/styled";
+
+export type Todo = {
+  id: string;
+  title: string;
+};
 
 type Props = {
   todosFetcher: Fetcher<Todo[]>;

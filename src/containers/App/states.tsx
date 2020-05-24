@@ -1,5 +1,5 @@
 import { Fetcher } from "../../helpers/fetcher";
-import { Todo } from "../../dataSources/todos";
+import { Todo } from "~/components/Todos";
 import React, { createContext, FC, useState, useTransition } from "react";
 
 export type AppState =

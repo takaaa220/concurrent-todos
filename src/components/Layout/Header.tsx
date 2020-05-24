@@ -1,7 +1,7 @@
 import React, { FC, useContext } from "react";
 import styled from "@emotion/styled";
-import { AppContext } from "../../containers/App/states";
-import { changePage as toTop } from "../../containers/Top";
+import { AppContext } from "~/containers/App/states";
+import { changePage as toTop } from "~/containers/Top";
 
 export const Header: FC = () => {
   const { changeState } = useContext(AppContext);

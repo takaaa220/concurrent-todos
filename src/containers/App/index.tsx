@@ -2,8 +2,8 @@ import React from "react";
 import { TodoPage } from "../Todo";
 import { AppContext, AppProvider, ContextType } from "./states";
 import { TopPage } from "../Top";
-import { FixedLoader } from "../../components/Loader";
-import { Layout } from "../..//components/Layout";
+import { FixedLoader } from "~/components/Loader";
+import { Layout } from "~/components/Layout";
 import { MarkdownPage } from "../Markdown";
 
 export const App = () => (
