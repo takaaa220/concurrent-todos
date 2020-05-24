@@ -3,6 +3,7 @@ import { Todo } from "~/components/Todos";
 import { generateStateManagenentTools } from "~/helpers/states";
 import { todoApi } from "~/dataSources/todos";
 import { Storage } from "~/dataSources/storage";
+import { TransitionStartFunction } from "react";
 
 export const TodoAPI = new todoApi(new Storage("todos"));
 
@@ -66,23 +67,22 @@ export const {
         true,
       );
     },
-    updateTodos: async ({ title }: { title: string }): Promise<void> => {
+    updateTodos: async (title: string, startTransition: TransitionStartFunction): Promise<void> => {
       const todosFetcher = new Fetcher<Todo[]>(async () => {
         await TodoAPI.write({ title });
 
         return TodoAPI.fetchAll();
       });
 
-      setState(
-        (state) => ({
+      startTransition(() => {
+        setState((state) => ({
           ...state,
           page: {
             ...state.page,
             todosFetcher,
           },
-        }),
-        true,
-      );
+        }));
+      });
     },
   }),
 });

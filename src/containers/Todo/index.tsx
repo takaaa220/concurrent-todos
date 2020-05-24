@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useTransition, Suspense } from "react";
 import styled from "@emotion/styled";
 
 import { Fetcher } from "~/helpers/fetcher";
@@ -20,15 +20,18 @@ type Props = {
 
 export const TodoPage: FC<Props> = ({ todosFetcher }) => {
   const { updateTodos } = useAppActions();
+  const [startTransition, isAdding] = useTransition({
+    timeoutMs: 10000,
+  });
 
   const handleSubmit = (title: string) => {
-    updateTodos({ title });
+    updateTodos(title, startTransition);
   };
 
   return (
     <Wrapper>
       <Todos todosFetcher={todosFetcher} />
-      <AddTodo onSubmit={handleSubmit} />
+      <AddTodo onSubmit={handleSubmit} adding={isAdding} />
     </Wrapper>
   );
 };

@@ -1,32 +1,39 @@
 import React, { FC, useCallback, ChangeEvent, useState, FormEvent } from "react";
+import { Loader } from "../Loader";
 
 type Props = {
   onSubmit: (value: string) => void;
+  adding: boolean;
 };
-export const AddTodo: FC<Props> = ({ onSubmit }) => {
+export const AddTodo: FC<Props> = ({ onSubmit, adding }) => {
   const [value, setValue] = useState("");
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
+      if (adding) return;
+
       setValue(e.target.value);
     },
-    [setValue],
+    [setValue, adding],
   );
 
   const handleSubmit = useCallback(
     async (e: FormEvent) => {
       e.preventDefault();
 
+      if (adding) return;
+
       await onSubmit(value);
       setValue("");
     },
-    [value, onSubmit],
+    [value, onSubmit, adding],
   );
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={handleChange} />
+        {adding && <Loader text="Adding..." />}
+        <input type="text" value={value} onChange={handleChange} disabled={adding} />
       </form>
     </>
   );

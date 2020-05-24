@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/core";
 
@@ -44,7 +44,7 @@ const Paragraph = styled.p`
   animation: ${animation} 1.5s ease-in-out infinite;
 `;
 
-export const Loader = () => <p>loading...</p>;
+export const Loader: FC<{ text?: string }> = ({ text = "loading..." }) => <p>{text}</p>;
 
 export const FixedLoader = () => <Fixed />;
 
