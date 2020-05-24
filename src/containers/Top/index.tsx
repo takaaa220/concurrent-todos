@@ -1,23 +1,21 @@
-import React, { useContext } from "react";
+import React, { FC } from "react";
 import styled from "@emotion/styled";
-import { AppContext } from "../App/states";
-import { changePage as toTodo } from "../Todo";
-import { changePage as toMarkdown } from "../Markdown";
+import { useAppActions } from "../App/states";
 
 export const changePage = () =>
   ({
     page: "top",
   } as const);
 
-export const TopPage = () => {
-  const { changeState } = useContext(AppContext);
+export const TopPage: FC = () => {
+  const { goToTodos, goToMarkdown } = useAppActions();
 
   return (
     <section>
       <Heading>This site has two React Concurrent Mode Demos.</Heading>
       <List>
-        <Item onClick={() => changeState(toTodo())}>Todos</Item>
-        <Item onClick={() => changeState(toMarkdown())}>Markdown Editor</Item>
+        <Item onClick={() => goToTodos()}>Todos</Item>
+        <Item onClick={() => goToMarkdown()}>Markdown Editor</Item>
       </List>
     </section>
   );

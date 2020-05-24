@@ -1,22 +1,22 @@
-import React from "react";
+import React, { FC } from "react";
 import { TodoPage } from "../Todo";
-import { AppContext, AppProvider, ContextType } from "./states";
+import { useAppState } from "./states";
 import { TopPage } from "../Top";
 import { FixedLoader } from "~/components/Loader";
 import { Layout } from "~/components/Layout";
 import { MarkdownPage } from "../Markdown";
 
-export const App = () => (
-  <AppProvider>
-    <AppContext.Consumer>
-      {({ state, loading }: ContextType) => (
-        <Layout>
-          {loading && <FixedLoader />}
-          {state.page === "top" && <TopPage />}
-          {state.page === "todos" && <TodoPage todosFetcher={state.todosFetcher} />}
-          {state.page === "markdown" && <MarkdownPage />}
-        </Layout>
-      )}
-    </AppContext.Consumer>
-  </AppProvider>
-);
+export const App: FC = () => {
+  const [{ page }, Provider, isPending] = useAppState();
+
+  return (
+    <Provider>
+      <Layout>
+        {isPending && <FixedLoader />}
+        {page.type === "top" && <TopPage />}
+        {page.type === "todos" && <TodoPage todosFetcher={page.todosFetcher} />}
+        {page.type === "markdown" && <MarkdownPage />}
+      </Layout>
+    </Provider>
+  );
+};

@@ -19,10 +19,12 @@ type Props = {
 
 export const TodoPage: FC<Props> = ({ todosFetcher }) => {
   const [value, setValue] = useState("");
+  const [updateTodoFetcher, setUpdateTodoFetcher] = useState<Fetcher<Todo> | undefined>();
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    console.log(value);
+    setUpdateTodoFetcher(new Fetcher(() => TodoAPI.write({ title: value })));
   };
 
   return (

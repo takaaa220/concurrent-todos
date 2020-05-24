@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 export const Footer: FC = () => (
   <Wrapper>
-    <a href="https://github.com/takaaa220">Author's GitHub</a>
+    <a href="https://github.com/takaaa220">GitHub</a>
   </Wrapper>
 );
 

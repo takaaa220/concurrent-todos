@@ -1,50 +1,67 @@
 import { Fetcher } from "../../helpers/fetcher";
 import { Todo } from "~/components/Todos";
-import React, { createContext, FC, useState, useTransition } from "react";
+import { generateStateManagenentTools } from "~/helpers/states";
+import { TodoAPI } from "~/dataSources/todos";
 
-export type AppState =
+export type AppState = {
+  page: AppPage;
+};
+
+export type AppPage =
   | {
-      page: "top";
+      type: "top";
     }
   | {
-      page: "todos";
+      type: "todos";
       todosFetcher: Fetcher<Todo[]>;
     }
   | {
-      page: "markdown";
+      type: "markdown";
     };
 
-export type ContextType = {
-  loading: boolean;
-  state: AppState;
-  changeState: (page: AppState) => void;
-};
-
-export const AppContext = createContext<ContextType>({
-  loading: false,
-  state: {
-    page: "top",
-  },
-  changeState: () => {
-    throw new Error("hello world");
-  },
-});
-
-export const AppProvider: FC = ({ children }) => {
-  const [state, changeState] = useState<AppState>({ page: "top" });
-  const [startTransition, loading] = useTransition({
-    timeoutMs: 10000,
-  });
-
-  const handleChangeState = (state: AppState) => {
-    startTransition(() => {
-      changeState(state);
-    });
+const getInitialState = (): AppState => {
+  return {
+    page: {
+      type: "top",
+    },
   };
-
-  return (
-    <AppContext.Provider value={{ loading, state, changeState: handleChangeState }}>
-      {children}
-    </AppContext.Provider>
-  );
 };
+
+export const {
+  useManagedState: useAppState,
+  useActions: useAppActions,
+} = generateStateManagenentTools({
+  getInitialState,
+  getActions: (setState) => ({
+    goToTop: (): void => {
+      setState((state) => ({
+        ...state,
+        page: {
+          type: "top",
+        },
+      }));
+    },
+    goToMarkdown: (): void => {
+      setState((state) => ({
+        ...state,
+        page: {
+          type: "markdown",
+        },
+      }));
+    },
+    goToTodos: (): void => {
+      const todosFetcher = new Fetcher<Todo[]>(TodoAPI.fetchAll);
+
+      setState(
+        (state) => ({
+          ...state,
+          page: {
+            type: "todos",
+            todosFetcher,
+          },
+        }),
+        true,
+      );
+    },
+  }),
+});

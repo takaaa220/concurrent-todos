@@ -5,7 +5,7 @@ class todoApi {
   private _todos: { [key: string]: Todo } = {};
 
   public async fetchAll(): Promise<Todo[]> {
-    const [response, _]: [any, unknown] = await Promise.all([
+    const [response]: [any, unknown] = await Promise.all([
       fetch(`https://jsonplaceholder.typicode.com/todos/`),
       sleep(800),
     ]);

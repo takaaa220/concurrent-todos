@@ -1,18 +1,17 @@
-import React, { FC, useContext } from "react";
+import React, { FC } from "react";
 import styled from "@emotion/styled";
-import { AppContext } from "~/containers/App/states";
-import { changePage as toTop } from "~/containers/Top";
+import { useAppActions } from "~/containers/App/states";
 
 export const Header: FC = () => {
-  const { changeState } = useContext(AppContext);
+  const { goToTop } = useAppActions();
 
   return (
     <Wrapper>
-      <Logo onClick={() => changeState(toTop())}>Concurrent Demo</Logo>
+      <Logo onClick={goToTop}>Concurrent Demo</Logo>
       <nav>
         <List>
           <Item>
-            <a href="https://github.com/takaaa220">Creator's GitHub</a>
+            <a href="https://github.com/takaaa220">GitHub</a>
           </Item>
         </List>
       </nav>
