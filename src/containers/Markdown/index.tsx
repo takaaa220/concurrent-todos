@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { FC } from "react";
 import styled from "@emotion/styled";
 
 export const changePage = () =>
@@ -6,7 +6,7 @@ export const changePage = () =>
     page: "markdown",
   } as const);
 
-export const MarkdownPage = () => {
+export const MarkdownPage: FC = () => {
   return (
     <section>
       <Heading>This page is markdown editor demo.</Heading>
