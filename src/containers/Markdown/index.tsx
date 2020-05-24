@@ -1,6 +1,8 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useTransition, useCallback } from "react";
 import styled from "@emotion/styled";
-import { useMarkdown } from "~/worker/useWorker";
+import { useMarkdown } from "~/worker/useMarkdown";
+import { Fetcher } from "~/helpers/fetcher";
+import { Markdown } from "~/components/Markdown";
 
 export const changePage = () =>
   ({
@@ -8,13 +10,29 @@ export const changePage = () =>
   } as const);
 
 export const MarkdownPage: FC = () => {
-  const { marked, markedText } = useMarkdown();
+  const [text, setText] = useState("");
+  const marked = useMarkdown();
+  const [startTransition] = useTransition();
+  const [markedFetcher, setMarkedFetcher] = useState<Fetcher<string>>(
+    new Fetcher(() => new Promise((resolve) => resolve(""))),
+  );
+
+  const handleChange = useCallback(
+    (value: string) => {
+      setText(value);
+      startTransition(() => {
+        setMarkedFetcher(
+          new Fetcher<string>(() => marked(value)),
+        );
+      });
+    },
+    [setText],
+  );
 
   return (
     <section>
       <Heading>This page is markdown editor demo.</Heading>
-      <textarea onChange={(e) => marked(e.target.value)} />
-      <p>{markedText}</p>
+      <Markdown originalText={text} markedFetcher={markedFetcher} onChange={handleChange} />
     </section>
   );
 };
