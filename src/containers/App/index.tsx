@@ -7,7 +7,7 @@ import { Layout } from "~/components/Layout";
 import { MarkdownPage } from "../Markdown";
 
 export const App: FC = () => {
-  const [{ page }, Provider, isPending] = useAppState();
+  const [{ page, worker }, Provider, isPending] = useAppState();
 
   return (
     <Provider>
@@ -15,7 +15,7 @@ export const App: FC = () => {
         {isPending && <FixedLoader />}
         {page.type === "top" && <TopPage />}
         {page.type === "todos" && <TodoPage todosFetcher={page.todosFetcher} />}
-        {page.type === "markdown" && <MarkdownPage />}
+        {page.type === "markdown" && <MarkdownPage markdownWorker={worker} />}
       </Layout>
     </Provider>
   );

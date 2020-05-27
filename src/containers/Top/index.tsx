@@ -2,11 +2,6 @@ import React, { FC } from "react";
 import styled from "@emotion/styled";
 import { useAppActions } from "../App/states";
 
-export const changePage = () =>
-  ({
-    page: "top",
-  } as const);
-
 export const TopPage: FC = () => {
   const { goToTodos, goToMarkdown } = useAppActions();
 

@@ -8,6 +8,7 @@ import { TransitionStartFunction } from "react";
 export const TodoAPI = new todoApi(new Storage("todos"));
 
 export type AppState = {
+  worker: Worker;
   page: AppPage;
 };
 
@@ -25,6 +26,7 @@ export type AppPage =
 
 const getInitialState = (): AppState => {
   return {
+    worker: new Worker("../../worker/index.ts"),
     page: {
       type: "top",
     },

@@ -4,14 +4,13 @@ import { useMarkdown } from "~/worker/useMarkdown";
 import { Fetcher } from "~/helpers/fetcher";
 import { Markdown } from "~/components/Markdown";
 
-export const changePage = () =>
-  ({
-    page: "markdown",
-  } as const);
+type Props = {
+  markdownWorker: Worker;
+};
 
-export const MarkdownPage: FC = () => {
+export const MarkdownPage: FC<Props> = ({ markdownWorker }) => {
   const [text, setText] = useState("");
-  const marked = useMarkdown();
+  const marked = useMarkdown(markdownWorker);
   const [startTransition] = useTransition();
   const [markedFetcher, setMarkedFetcher] = useState<Fetcher<string>>(
     new Fetcher(() => new Promise((resolve) => resolve(""))),
