@@ -32,7 +32,7 @@
     "dompurify": "^2.0.11",
     "helpers": "^0.0.6",
     "marked": "^1.1.0",
-    "react": "0.0.0-experimental-aae83a4b9",
+    "react": "0.14.0",
     "react-dom": "0.0.0-experimental-aae83a4b9"
   }
 }
