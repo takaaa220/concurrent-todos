@@ -29,7 +29,7 @@
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "components": "^0.1.0",
-    "dompurify": "^2.0.11",
+    "dompurify": "^2.0.17",
     "helpers": "^0.0.6",
     "marked": "^1.1.0",
     "react": "0.0.0-experimental-aae83a4b9",
